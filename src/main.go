@@ -143,6 +143,9 @@ func allOrders(c *gin.Context)  {
 func createOrder(c *gin.Context)  {
 	var order orderDetails
 	err := c.BindJSON(&order)
+
+	dh.orders = append(dh.orders, order)
+
 	checkError(err)
 	dh.addOrder(order)
 	c.String(200, "OK Added!")
