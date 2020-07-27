@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "grpc";
+
+message ApiType {
+  int64 type = 1;
+  int64 customerId = 2;
+  Customer customerData = 3;
+}
+
+message Customer {
+  int64 customerId = 1;
+  string customName = 2;
+}
+
+message ListCustomers {
+  repeated Customer customers = 1;
+}
+
+message ApiResponse {
+  int64 statusCode = 1;
+}
+
+service ApiService {
+  rpc GetAllCustomers(ApiType) returns (ListCustomers){}
+  rpc PutCustomer(ApiType) returns (ApiResponse){}
+  rpc GetCustomer(ApiType) returns (Customer){}
+}
